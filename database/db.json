@@ -1,18 +1,17 @@
 {
   "tareas": [
     {
-      "titulo": "primera tarea",
-      "contenido": "Contenido Primera tarea",
+      "titulo": "primera tarea vv",
+      "contenido": "Contenido Primera a",
       "terminado": true,
       "id": 1,
       "terminad": true
     },
     {
-      "titulo": "tarea 2",
-      "contenido": null,
+      "titulo": "tarea 5",
+      "contenido": "tarea 5 c",
       "terminado": false,
-      "id": 2,
-      "terminad": true
+      "id": 6
     }
   ]
 }

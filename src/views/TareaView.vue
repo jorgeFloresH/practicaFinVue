@@ -13,14 +13,17 @@
   
   <div class="accordion-item" v-for="(value, index) in tareas">
     <h2 class="accordion-header" id="headingTwo">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="`#collapseTwo${index}`" aria-expanded="false" :aria-controls="`collapseTwo${index}`">
         <input type="checkbox" :checked="value.terminado" @click="setearCheckbox(value.terminado, value.id)">
         {{value.titulo}}
       </button>
     </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+    <div :id="`collapseTwo${index}`" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         {{value.contenido}}
+
+        <app-acciones @onAccion="irA($event, value.id)"></app-acciones>
+        
       </div>
     </div>
   </div>
@@ -32,6 +35,7 @@
 </template>
 
 <script>
+    import AppAcciones from '@/components/AppAcciones.vue';
     export default {
         name: 'tareaView',
         data(){
@@ -53,6 +57,8 @@
                 })
                 .then(response => {
                     console.log(response);
+                    this.tarea.titulo = null;
+                    this.getTareas();
                 })
                 .catch(e => console.log(e));
             },
@@ -79,6 +85,23 @@
                 console.log(response);
                 })
                 .catch(e => console.log(e));
+            },
+            irA(opcion, tarea_id){
+                if(opcion === 'editar'){
+                    this.$router.push({name: 'editarTarea', params: {id: tarea_id}});
+                } else {
+                    if(confirm("Esta seguro de eliminar tarea")){
+                        axios({
+                            method: "delete",
+                            url: "http://localhost:4444/tareas/"+tarea_id
+                        })
+                        .then(response => {
+                            this.getTareas();
+                        console.log(response);
+                        })
+                        .catch(e => console.log(e));
+                    }
+                }
             }
         },
         computed: {
@@ -87,6 +110,7 @@
             this.getTareas()
         },
         components: {
+            AppAcciones
         }
     }
 </script>

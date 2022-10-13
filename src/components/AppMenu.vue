@@ -22,9 +22,11 @@
     </div>
   </div>
 </nav>
+<app-alert></app-alert>
 </template>
 
 <script>
+import AppAlert from '@/components/AppAlert.vue';
     export default {
         name: 'appMenu',
         data(){
@@ -39,6 +41,7 @@
         mounted(){
         },
         components: {
+          AppAlert
         }
     }
 </script>
