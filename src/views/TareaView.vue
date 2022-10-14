@@ -18,9 +18,9 @@
 
        <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"
-                :checked="soloTeminado" v-on:input="soloTeminado = $event.target.checked">
+                :checked="$store.state.soloTerminado" v-on:input="$store.state.soloTerminado = $event.target.checked">
             <label class="form-check-label" for="flexSwitchCheckChecked">Mostrar solo terminados
-                {{soloTeminado}}</label>
+                {{$store.state.soloTerminado}}</label>
         </div>
 
         <div class="accordion" id="accordionExample">
@@ -72,7 +72,7 @@ export default {
         agregarTarea() {
             axios({
                 method: "post",
-                url: "http://localhost:4444/tareas",
+                url: process.env.VUE_APP_RUTA_API+"/tareas",
                 data: this.tarea
             })
                 .then(response => {
@@ -85,7 +85,7 @@ export default {
         getTareas() {
             axios({
                 method: "get",
-                url: "http://localhost:4444/tareas/?q="+this.textoABuscar
+                url: process.env.VUE_APP_RUTA_API+"/tareas/?q="+this.textoABuscar
             })
                 .then(response => {
                     this.tareas = response.data;
@@ -96,7 +96,7 @@ export default {
         setearCheckbox(terminado, id) {
             axios({
                 method: "patch",
-                url: "http://localhost:4444/tareas/" + id,
+                url: process.env.VUE_APP_RUTA_API+"/tareas/" + id,
                 data: {
                     terminado: !terminado
                 }
@@ -113,7 +113,7 @@ export default {
                 if (confirm("Esta seguro de eliminar tarea")) {
                     axios({
                         method: "delete",
-                        url: "http://localhost:4444/tareas/" + tarea_id
+                        url: process.env.VUE_APP_RUTA_API+"/tareas/" + tarea_id
                     })
                         .then(response => {
                             this.getTareas();
@@ -125,7 +125,7 @@ export default {
         },
         lista_(){
             
-            if(this.soloTeminado){
+            if(this.$store.state.soloTerminado){
                 return this.tareas.filter(item =>{
                     return item.terminado;
                 });
@@ -135,7 +135,12 @@ export default {
     },
     computed: {
         lista(){
-            return this.lista_();
+            if(this.$store.state.soloTerminado){
+                return this.tareas.filter(item =>{
+                    return item.terminado;
+                });
+            }
+            return this.tareas;
         }
     },
     mounted() {

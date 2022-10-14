@@ -30,7 +30,7 @@ export default {
         getTarea(){
             axios({
                 method: "get",
-                url: "http://localhost:4444/tareas/"+this.$route.params.id
+                url: process.env.VUE_APP_RUTA_API+"/tareas/"+this.$route.params.id
             })
             .then(response => {
                 this.tarea = response.data;
@@ -41,7 +41,7 @@ export default {
         guardar(){
             axios({
                 method: "patch",
-                url: "http://localhost:4444/tareas/"+this.$route.params.id,
+                url: process.env.VUE_APP_RUTA_API+"/tareas/"+this.$route.params.id,
                 data: this.tarea
             })
             .then(response => {
