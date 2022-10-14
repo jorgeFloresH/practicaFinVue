@@ -1,5 +1,5 @@
 <template>
-    <div v-for="(value, index) in $store.getters.getMensajes">
+    <div v-for="(value, index) in $store.getters.getMensajes" :key="index">
         <div v-if="value.texto !== null" :class="`alert ${tipoError(value.tipo)}`">
             {{value.texto}}
             <i class="fa-regular fa-circle-xmark" @click="quitarMensaje(index)"></i>

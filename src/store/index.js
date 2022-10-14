@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    soloTerminado: false,
     delMensajeIndex: null,
     mensajes: [],
     mensaje:{
@@ -12,6 +13,9 @@ export default createStore({
   getters: {
     getMensajes(state){
       return state.mensajes;
+    },
+    getSoloTerminado(state){
+      return state.soloTerminado;
     }
   },
   mutations: {
@@ -19,7 +23,7 @@ export default createStore({
       state.mensajes.push(state.mensaje);
     },
     delMensaje(state){
-      state.mensajes = state.mensajes.splice(state.delMensajeIndex,1);
+      state.mensajes.splice(state.delMensajeIndex,1);
     }
     
   },
