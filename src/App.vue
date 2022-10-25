@@ -1,10 +1,13 @@
 <template>
   <app-menu titulo="My App"></app-menu>
+  <app-table title="prueba"></app-table>
   <router-view />
 </template>
 
 <script>
 import AppMenu from '@/components/AppMenu.vue';
+import AppTable from '@/components/AppTable.vue';
+
 export default {
   name: 'app',
   data() {
@@ -18,7 +21,7 @@ export default {
   mounted() {
   },
   components: {
-    AppMenu
+    AppMenu,AppTable
   }
 }
 </script>

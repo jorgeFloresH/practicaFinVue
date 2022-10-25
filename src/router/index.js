@@ -1,11 +1,33 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import propietarioView from '../views/PropietarioView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/propietarios',
+    name: 'propietarios',
+    // component: propietarioView
+    component: () => import(/* webpackChunkName: "about" */ '../views/PropietarioView.vue')
+
+  },
+  {
+    path: '/propietarios/:id',
+    name: 'verPropietarios',
+    // component: propietarioView
+    component: () => import(/* webpackChunkName: "about" */ '../views/VerPropietarioView.vue')
+
+  },
+  {
+    path: '/propietarios/:id/editar',
+    name: 'editarPropietarios',
+    // component: propietarioView
+    component: () => import(/* webpackChunkName: "about" */ '../views/EditarPropietarioView.vue')
+
   },
   {
     path: '/about',
