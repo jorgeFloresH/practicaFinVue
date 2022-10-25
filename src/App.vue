@@ -7,7 +7,7 @@
 <script>
 import AppMenu from '@/components/AppMenu.vue';
 import AppTable from '@/components/AppTable.vue';
-
+ 
 export default {
   name: 'app',
   data() {
